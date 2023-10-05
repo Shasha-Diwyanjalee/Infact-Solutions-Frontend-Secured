@@ -101,6 +101,15 @@ const Profile = () => {
       });
       localStorage.removeItem("role");
       localStorage.removeItem("Authorization");
+
+      //Remove cookie
+      document.cookie =
+        "computer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        document.cookie =
+          "connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        
+      setTimeout((window.location.href = "/"), 1000);
       window.location = "/login";
     }
   };

@@ -77,8 +77,7 @@ const ProductInfromation = (productId) => {
   }, []);
 
 const addToWishList = async () => {
-  const authToken = localStorage.getItem("Authorization");
-
+const authToken = document.cookie.includes("computer");
   // Check if the user is logged in
   if (!authToken) {
     toast.warning("Please log in to add products to your wishlist.", {
@@ -111,7 +110,7 @@ const addToWishList = async () => {
 };
 
 const addToCart = async () => {
-  const authToken = localStorage.getItem("Authorization");
+  const authToken = document.cookie.includes("computer");
 
   // Check if the user is logged in
   if (!authToken) {

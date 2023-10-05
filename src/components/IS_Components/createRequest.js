@@ -148,7 +148,7 @@ export default class CreateRequestproduct extends Component {
         userEmail: this.state.userEmail,
       };
 
-      const authToken = localStorage.getItem("Authorization");
+      const authToken = document.cookie.includes("computer");
 
       if (!authToken) {
         toast.warning("Please log in to create a request.", {

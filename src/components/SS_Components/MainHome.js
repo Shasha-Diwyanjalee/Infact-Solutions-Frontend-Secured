@@ -6,6 +6,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PersonIcon from "@material-ui/icons/Person";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default class MainHome extends Component {
   constructor(props) {
@@ -49,6 +50,39 @@ export default class MainHome extends Component {
       }
     });
   };
+
+  checkForCookie = () => {
+    // Check if the authentication cookie exists
+    const authToken = document.cookie.includes("computer");
+
+    if (!authToken) {
+      // If the authentication cookie doesn't exist, show an alert
+      toast.warning("Please log in to access your profile.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    // If the authentication cookie exists, navigate to the profile page
+    window.location = `/profile`;
+  };
+
+  checkForCookieCart = () => {
+    // Check if the authentication cookie exists
+    const authToken = document.cookie.includes("computer");
+
+    if (!authToken) {
+      // If the authentication cookie doesn't exist, show an alert
+      toast.warning("Please log in to access your cart.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    // If the authentication cookie exists, navigate to the profile page
+    window.location = `/cart`;
+  };
+
   render() {
     return (
       <Navbar
@@ -92,18 +126,24 @@ export default class MainHome extends Component {
           </form>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Nav>
-            <IconButton aria-label="cart" href="/cart">
+            <IconButton
+              aria-label="cart"
+              //href="/cart"
+              onClick={this.checkForCookieCart}
+            >
               <ShoppingCartIcon
                 fontSize="medium"
                 style={{ color: "#FFFFFF" }}
               />
             </IconButton>
             &nbsp;
-            <Link to="/profile">
-              <IconButton aria-label="profile" style={{ color: "#FFFFFF" }}>
-                <PersonIcon fontSize="large" />
-              </IconButton>
-            </Link>
+            <IconButton
+              aria-label="profile"
+              style={{ color: "#FFFFFF" }}
+              onClick={this.checkForCookie}
+            >
+              <PersonIcon fontSize="large" />
+            </IconButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
           </Nav>
         </Navbar.Collapse>
