@@ -50,9 +50,8 @@ export default class CusLogin extends Component {
         });
       })
       .catch((err) => {
-        console.log(err);
         this.setState({ open: true });
-        toast.warning("loging unsucces", {
+        toast.warning(err.response.data.error, {
           position: toast.POSITION.TOP_CENTER,
         });
       });
