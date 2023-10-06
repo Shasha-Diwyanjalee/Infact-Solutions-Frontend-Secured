@@ -44,11 +44,33 @@ export default class MainHome extends Component {
 
   handleSearchArea = (e) => {
     const searchKey = e.currentTarget.value;
-    axios.get("http://localhost:8070/products/displayProducts").then((res) => {
-      if (res.data.success) {
-        this.filterData(res.data.existingProducts, searchKey);
-      }
-    });
+
+    // Check for non-alphanumeric characters
+    if (/[^a-zA-Z0-9 ]/.test(searchKey)) {
+      // Non-alphanumeric characters detected, show a warning message
+      toast.warning("Invalid characters detected", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    } else {
+      // Perform the search request with the cleaned search key
+      axios
+        .get(
+          `http://localhost:8070/products/displayProducts?search=${searchKey}`
+        )
+        .then((res) => {
+          if (res.data.success) {
+            this.setState({
+              products: res.data.existingProducts,
+            });
+          }
+        });
+    }
+    // axios.get("http://localhost:8070/products/displayProducts").then((res) => {
+    //   if (res.data.success) {
+    //     this.filterData(res.data.existingProducts, searchKey);
+    //   }
+    // });
   };
 
   checkForCookie = () => {

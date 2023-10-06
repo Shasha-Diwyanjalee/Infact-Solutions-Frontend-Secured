@@ -31,7 +31,6 @@ export default function CusRegistration() {
     e.preventDefault();
 
     fullName = firstName.concat(" ", lastName);
-
     let newCustomer = {
       name: fullName,
       add1: add1,
@@ -94,34 +93,32 @@ export default function CusRegistration() {
           toast.success("Registration Success", {
             position: toast.POSITION.TOP_CENTER,
           });
+          setFirstName("");
+          setLastName("");
+          setAddress1("");
+          setAddress2("");
+          setCity("");
+          setArea("");
+          setPostalCode("");
+          setCountry("");
+          setPhoneNumber("");
+          setDOB("");
+          setEmail("");
+          setPassword1("");
+          setPassword2("");
+          setImageUrl("");
           window.location = "/login";
         })
         .catch((err) => {
-          toast.warning(
-            "Customer account already exists. Please check your Email.",
-            { position: toast.POSITION.TOP_CENTER }
-          );
+          toast.warning(err.response.data.error || "Registration Failed", {
+            position: toast.POSITION.TOP_CENTER,
+          });
         });
     } else {
       toast.warning("Password mismatch", {
         position: toast.POSITION.TOP_CENTER,
       });
     }
-
-    setFirstName("");
-    setLastName("");
-    setAddress1("");
-    setAddress2("");
-    setCity("");
-    setArea("");
-    setPostalCode("");
-    setCountry("");
-    setPhoneNumber("");
-    setDOB("");
-    setEmail("");
-    setPassword1("");
-    setPassword2("");
-    setImageUrl("");
   };
 
   return (
