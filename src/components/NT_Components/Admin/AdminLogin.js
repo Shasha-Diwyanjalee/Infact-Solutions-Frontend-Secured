@@ -36,7 +36,7 @@ export default class AdminLogin extends Component {
       .catch((err) => {
         console.log(err);
         this.setState({ open: true });
-        alert("loging error");
+        alert(err.response.data.error);
       });
   }
 
